@@ -11,6 +11,7 @@ gem "bundler", "~> 2.2.32"
 gem "rails", "~> 7.0.0.rc1"
 
 # 7.0 asset pipeline
+gem "sprockets-rails", ">= 3.4.1"
 gem "jsbundling-rails", "~> 0.2.2"
 gem "cssbundling-rails", "~> 0.2.7"
 
