@@ -1,0 +1,112 @@
+---
+exclude_paths:
+  - bin
+  - scripts
+
+detectors:
+  UtilityFunction:
+    enabled: false # Until pronto/ale respect path exclusions
+    public_methods_only: true
+    exclude:
+      # Exclude Sidekiq/ActiveJob "perform" methods, which are stateless.
+      - perform
+      # Exclude Sidekiq Middleware "call" methods, which can be stateless.
+      - call
+
+  TooManyStatements:
+    exclude:
+      - initialize
+    max_statements: 8
+
+  RepeatedConditional:
+    max_ifs: 4
+
+  LongParameterList:
+    exclude:
+      - initialize
+
+  # This one just makes sure the Class/Module has a comment. Dumb.
+  IrresponsibleModule:
+    enabled: false
+
+  # Transaction result blocks are 3-deep
+  NestedIterators:
+    max_allowed_nesting: 3
+
+  # Dislikes method names ending in a number (Like `test2`, etc...) But, these
+  # are the names of actual AWS services, and it is common to have the variables
+  # named the same.
+  UncommunicativeMethodName:
+    accept:
+      - s3
+      - ec2
+      - route53
+      - "/v3$/"      # helpers named like `getv3`
+      - e164
+  UncommunicativeVariableName:
+    accept:
+      - s3
+      - ec2
+      - route53
+      - i     # array index
+      - c     # config
+      - k     # key
+      - v     # value
+      - h     # hash initializer (Hash.new { |h,k| h[k] = Hash.new })
+      - e164
+      - "_"
+  UncommunicativeModuleName:
+    accept:
+      - V2
+
+
+directories:
+  "app/components":
+    # Transaction steps are all just "Utility Functions"
+    UtilityFunction:
+      enabled: false
+    # Steps can have more parameters, just don't go crazy
+    LongParameterList:
+      max_params: 6
+  "app/controllers":
+    NestedIterators:
+      max_allowed_nesting: 4
+    UnusedPrivateMethod:
+      enabled: false
+    InstanceVariableAssumption:
+      # Ivars are used all the time in controllers
+      enabled: false
+  "app/helpers":
+    UtilityFunction:
+      enabled: false
+  "app/subscribers":
+    # AS::Subscriber objects tend to rely heavily on `event` and `payload`, so
+    # its hard to avoid "Feature Envy", but is perfectly readable.
+    FeatureEnvy:
+      enabled: false
+  "app/transactions":
+    # Transaction steps are all just "Utility Functions"
+    UtilityFunction:
+      enabled: false
+  "db/migrate":  # Generated migrations follow thier own rules
+    TooManyStatements:
+      enabled: false
+    FeatureEnvy:
+      enabled: false
+    UncommunicativeVariableName:
+      enabled: false
+    DuplicateMethodCall:
+      enabled: false
+    NestedIterators:
+      max_allowed_nesting: 3
+  "spec/support":
+    UtilityFunction:
+      enabled: false
+
+  # These objects are basic Structs that assign ivars in the initializer
+  "app/shields":
+    InstanceVariableAssumption:
+      enabled: false
+  "lib/heracles":
+    InstanceVariableAssumption:
+      enabled: false
