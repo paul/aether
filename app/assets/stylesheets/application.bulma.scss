@@ -37,3 +37,82 @@
 // @import "bulma/sass/layout/section.sass";
 
 @import 'bulma/bulma';
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+.conversation {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.msg { 
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0.25rem 0;
+
+  .text {
+    width: fit-content;
+    position: relative;
+    border-radius: 14px;
+    font-size: 14px;
+    padding: 8px 14px;
+    max-width: 80%;
+
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  &.outbound {
+    justify-content: flex-end;
+
+    .text {
+      background: rgb(212, 230, 255);
+      color: rgb(52, 110, 130);
+      border-bottom-right-radius: 0px;
+    }
+  }
+
+  &.inbound {
+    align-self: flex-start;
+
+    .text {
+      background: rgb(230, 230, 230);
+      color: rgb(52, 110, 130);
+      border-bottom-left-radius: 0px;
+    }
+  }
+
+  // &.outbound + &.outbound {
+  //   margin: 0.25rem 0 0;
+  // }
+
+  // &.outbound + &.outbound:not(:last-child) {
+  //   margin: 0.25rem 0 0;
+  // }
+
+  // &.outbound + &.outbound:last-child {
+  //   margin-bottom: 0.5rem;
+  // }
+
+  // &.inbound + &.inbound {
+  //   margin: 0.25rem 0 0;
+  // }
+
+  // &.inbound + &.inbound:not(:last-child) {
+  //   margin: 0.25rem 0 0;
+  // }
+
+  // &.inbound + &.inbound:last-child {
+  //   margin-bottom: 0.5rem;
+  // }
+
+}
