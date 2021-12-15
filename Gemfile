@@ -16,6 +16,10 @@ gem "jsbundling-rails", "~> 0.2.2"
 gem "cssbundling-rails", "~> 0.2.7"
 gem "haml", "~> 5.2"
 
+gem "stimulus-rails", "~> 1.0"
+gem "cable_ready", "5.0.0.pre8"
+gem "stimulus_reflex", "3.5.0.pre8"
+
 # Database
 gem "pg", "~> 1.1"
 
@@ -86,5 +90,7 @@ group :development do
   gem "ruby-prof",     "~> 1.0", require: false
   gem "stackprof",     "~> 0.2", require: false
 end
+
+
 
 

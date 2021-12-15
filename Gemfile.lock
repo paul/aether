@@ -75,6 +75,9 @@ GEM
     bundler-audit (0.9.0.1)
       bundler (>= 1.2.0, < 3)
       thor (~> 1.0)
+    cable_ready (5.0.0.pre8)
+      rails (>= 5.2)
+      thread-local (>= 1.1.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
@@ -193,6 +196,7 @@ GEM
       ffi (>= 1.0.6)
       msgpack (>= 0.4.3)
       optimist (>= 3.0.0)
+    redis (4.5.1)
     reek (6.0.6)
       kwalify (~> 0.7.0)
       parser (~> 3.0.0)
@@ -260,8 +264,17 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     stackprof (0.2.17)
+    stimulus-rails (1.0.0)
+      railties (>= 6.0.0)
+    stimulus_reflex (3.5.0.pre8)
+      cable_ready (= 5.0.0.pre8)
+      nokogiri
+      rack
+      rails (>= 5.2)
+      redis
     temple (0.8.2)
     thor (1.1.0)
+    thread-local (1.1.0)
     tilt (2.0.10)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -286,6 +299,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   bundle-audit (~> 0.1)
   bundler (~> 2.2.32)
+  cable_ready (= 5.0.0.pre8)
   cssbundling-rails (~> 0.2.7)
   database_consistency (~> 1.1)
   debug (>= 1.0.0)
@@ -312,6 +326,8 @@ DEPENDENCIES
   ruby-prof (~> 1.0)
   sprockets-rails (>= 3.4.1)
   stackprof (~> 0.2)
+  stimulus-rails (~> 1.0)
+  stimulus_reflex (= 3.5.0.pre8)
   web-console (>= 4.1.0)
 
 RUBY VERSION
