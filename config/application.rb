@@ -28,10 +28,19 @@ module Aether
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
-    config.generators.system_tests = nil
+    config.generators do |g|
+      g.template_engine :haml
+      g.test_framework :rspec, fixture: false
+      g.system_tests nil
+      g.helper nil
+    end
+
+    config.active_record.schema_format = :sql
+
+    ENV["TZ"] = "UTC"
+    config.time_zone = "UTC"
   end
 end

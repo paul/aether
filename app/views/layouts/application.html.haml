@@ -1,0 +1,42 @@
+!!!
+-# Stolen from https://www.matuzo.at/blog/html-boilerplate/
+%html.no-js{lang: "en"}
+  %head
+    %meta{charset: "UTF-8"}/
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+
+    - controller_name = controller.controller_name 
+    - subtitle = defined?(title) ? title : controller_name.titleize
+
+    %title TextUs – #{subtitle}
+
+    = javascript_tag type: "module", nonce: true do
+      document.documentElement.classList.remove('no-js');
+      document.documentElement.classList.add('js');
+
+    = csrf_meta_tags
+    = action_cable_meta_tag 
+
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application", data: {turbo_track: :reload}, defer: true
+
+    %meta{content: "Textus Chat #{subtitle}", name: "description"}/
+    %meta{content: "TextUs Chat #{subtitle}", property: "og:title"}/
+    -# %meta{content: "Page description", property: "og:description"}/
+    -# %meta{content: "https://www.mywebsite.com/image.jpg", property: "og:image"}/
+    -# %meta{content: "Image description", property: "og:image:alt"}/
+    %meta{content: "en_US", property: "og:locale"}/
+    %meta{content: "website", property: "og:type"}/
+    -# %meta{content: "summary_large_image", name: "twitter:card"}/
+    -# %meta{content: "https://next.textus.com/admin", property: "og:url"}/
+
+    -# %link{href: "https://next.textus.com/admin", rel: "canonical"}/
+    %link{href: "/favicon.ico", rel: "icon"}/
+    %link{href: asset_path("icon-192x192.png", skip_pipeline: true), rel: "apple-touch-icon"}/
+    %link{href: asset_path("manifest.json", skip_pipeline: true), rel: "manifest"}/
+
+    %meta{content: "#FFF", name: "theme-color"}/
+
+  %body
+    = yield
+

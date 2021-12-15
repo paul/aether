@@ -14,6 +14,7 @@ gem "rails", "~> 7.0.0.rc1"
 gem "sprockets-rails", ">= 3.4.1"
 gem "jsbundling-rails", "~> 0.2.2"
 gem "cssbundling-rails", "~> 0.2.7"
+gem "haml", "~> 5.2"
 
 # Database
 gem "pg", "~> 1.1"
@@ -85,4 +86,5 @@ group :development do
   gem "ruby-prof",     "~> 1.0", require: false
   gem "stackprof",     "~> 0.2", require: false
 end
+
 
