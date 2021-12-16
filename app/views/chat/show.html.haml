@@ -1,5 +1,6 @@
 
-#conversation.conversation
+#chat{data: {controller: "chat"}}
+  #conversation.conversation{data: {chat_index_value: 0}}
 
-%a.button{href: "#", data: {controller: "chat", action: "click->chat#next"}}
-  Ok
+  %a.button{href: "#", data: {action: "click->chat#next"}}
+    Ok

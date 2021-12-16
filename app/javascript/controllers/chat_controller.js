@@ -15,16 +15,25 @@ export default class extends ApplicationController {
    * By default, StimulusReflex overrides the -connect- method so make sure you
    * call super if you intend to do anything else when this controller connects.
   */
+  static values = {
+    index: Number
+  }
 
   connect () {
     super.connect()
     // add your code here, if applicable
+    setTimeout(() => this.next(), 200)
   }
 
   next (event) {
-    console.log({event})
-    this.stimulate("Chat#next")
+    console.log({index: this.indexValue})
+    this.stimulate("Chat#next", this.indexValue)
   }
+
+  indexValueChanged() {
+    console.log({newIndex: this.indexValue})
+  }
+
 
   /* Reflex specific lifecycle methods.
    *

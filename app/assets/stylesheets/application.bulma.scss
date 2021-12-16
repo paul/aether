@@ -46,8 +46,14 @@ html, body {
   height: 100%;
 }
 
-.conversation {
+#chat {
   height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+}
+
+.conversation {
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-end;
