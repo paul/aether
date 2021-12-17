@@ -32,7 +32,8 @@ class ChatReflex < ApplicationReflex
   #
   # Learn more at: https://docs.stimulusreflex.com/reflexes#reflex-classes
 
-  def next(index = 0)
+  def next(index = -1)
+    index += 1
     logger.debug(index: index)
     message = SURVEY[index]
 
@@ -44,21 +45,42 @@ class ChatReflex < ApplicationReflex
       html: html
     )
     .set_dataset_property(
-      selector: "#conversation",
+      selector: "#chat",
       name: "chatIndexValue",
-      value: index + 1
+      value: index
     )
     morph :nothing
   end
 
+  def answer(index, answer)
+    message = SURVEY[index]
+    logger.debug(index: index, answer: answer)
+
+    html = render(partial: "answer", locals: {message: {text: answer}})
+    cable_ready
+      .remove(
+        selector: "#question_#{message[:id]}"
+      )
+      .append(
+      selector: "#conversation",
+      html: html
+    )
+    self.next(index)
+  end
+
   SURVEY = [
-    {text: "Hi John, I have a few more questions about your profile."},
-    {text: "Is 720-555-1234 your current phone number?",
+    {id: 1, 
+     text: "Hi John, I have a few more questions about your profile."},
+    {id: 2,
+     text: "Is 720-555-1234 your current phone number?",
      select: ["Yes", "No"]},
-    {text: "What is your current phone number?",
+    {id: 3,
+     text: "What is your current phone number?",
      input: :phone_number},
-    {text: "Great! What types of jobs are you interested in?",
+    {id: 4,
+     text: "Great! What types of jobs are you interested in?",
      select: ["Accounting", "Data", "Design", "Education", "Engineering", "IT", "Product Management", "Technology"]},
-    {text: "Thanks!"},
+    {id: 5,
+     text: "Thanks!"},
   ]
 end

@@ -21,18 +21,31 @@ export default class extends ApplicationController {
 
   connect () {
     super.connect()
-    // add your code here, if applicable
+
     setTimeout(() => this.next(), 200)
   }
 
   next (event) {
-    console.log({index: this.indexValue})
     this.stimulate("Chat#next", this.indexValue)
   }
 
-  indexValueChanged() {
-    console.log({newIndex: this.indexValue})
+  answer (event) {
+    console.log({event})
+    event.preventDefault()
+
+    const input = event.target.getElementsByTagName("input").item(0)
+    console.log({input})
+    const val = input ? 
+      input.value
+      :
+      event.target.getAttribute("value")
+
+    this.stimulate("Chat#answer", this.indexValue, val)
   }
+
+  // indexValueChanged() {
+  //   console.log({newIndex: this.indexValue})
+  // }
 
 
   /* Reflex specific lifecycle methods.

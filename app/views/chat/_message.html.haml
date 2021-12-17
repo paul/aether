@@ -1,5 +1,22 @@
-.msg.inbound
+.msg.inbound{id: "text_#{message[:id]}"}
   .text
     %p
       = message[:text]
+
+- if message[:select]
+  .msg.outbound{id: "question_#{message[:id]}"}
+    .text
+      .form
+        .field
+          - message[:select].each do |label|
+            %a.button{href: "#", data: {action: "click->chat#answer"}, value: label}
+              = label
+
+- if message[:input]
+  .msg.outbound{id: "question_#{message[:id]}"}
+    .text
+      .form
+        .field
+          %form{action: "#", data: {action: "submit->chat#answer"}}
+            %input.input{type: :text, name: message[:input]}
 
